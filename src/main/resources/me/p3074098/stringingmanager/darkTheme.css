@@ -1,0 +1,39 @@
+.background-0 {
+    -fx-background-color: #4d4d4d;
+}
+
+.background-1 {
+    -fx-background-color: #3b3b3b;
+}
+
+.background-2 {
+    -fx-background-color: #262626;
+}
+
+.text-fill-0 {
+    -fx-text-fill: #ffffff;
+}
+
+.text-fill-1 {
+    -fx-text-fill: #e3e3e3;
+}
+
+.border-radius-0 {
+    -fx-background-radius: 10px;
+}
+
+.border-radius-1 {
+    -fx-background-radius: 50%;
+}
+
+.border-color-0 {
+    -fx-border-color: #ffffff;
+}
+
+.border-color-1 {
+    -fx-border-color: #e3e3e3;
+}
+
+.drop-shadow-0 {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 20, 0.1, 0.0, 0.0);
+}
