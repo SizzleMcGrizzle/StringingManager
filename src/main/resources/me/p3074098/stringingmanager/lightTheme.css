@@ -5,7 +5,10 @@
     -fx-hover-2: #b2b2b2;
     -fx-green-accent: #8af88a;
     -fx-text-color-0: black;
-    -fx-text-color-1: 333;
+    -fx-text-color-1: #333;
+    -fx-drop-shadow-0: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 20, 0.1, 0.0, 0.0);
+    -fx-fancy-input-select-color: #2CA1FF;
+    -fx-fancy-input-warn-color: red;
 }
 
 .background-0 {
@@ -61,23 +64,23 @@
 }
 
 .drop-shadow-0 {
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 20, 0.1, 0.0, 0.0);
+    -fx-effect: -fx-drop-shadow-0;
 }
 
 .fancy-input-selected-text-fill {
-    -fx-text-fill: #2CA1FF;
+    -fx-text-fill: -fx-fancy-input-select-color;
 }
 
 .fancy-input-selected-border-fill {
-    -fx-border-color: #2CA1FF;
+    -fx-border-color: -fx-fancy-input-select-color;
 }
 
 .fancy-input-warn-text-fill {
-    -fx-text-fill: red;
+    -fx-text-fill: -fx-fancy-input-warn-color;
 }
 
 .fancy-input-warn-border-fill {
-    -fx-border-color: red;
+    -fx-border-color: -fx-fancy-input-warn-color;
 }
 
 .fancy-input-normal-text-fill {

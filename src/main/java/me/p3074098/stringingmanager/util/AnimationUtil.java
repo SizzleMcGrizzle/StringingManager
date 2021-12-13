@@ -1,9 +1,6 @@
 package me.p3074098.stringingmanager.util;
 
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -22,7 +19,9 @@ public class AnimationUtil {
     public static void animateBorder(Region region) {
 
         if (timelineMap.containsKey(region)) {
-            timelineMap.get(region).play();
+            Timeline t = timelineMap.get(region);
+            if (t.getStatus() != Animation.Status.RUNNING)
+                t.play();
             return;
         }
 
@@ -54,7 +53,7 @@ public class AnimationUtil {
 
     public static void stopAnimateBorder(Region r, String borderColor) {
         Optional.ofNullable(timelineMap.get(r)).ifPresent(t -> {
-            t.stop();
+            t.pause();
             r.setStyle("-fx-border-color: " + borderColor);
         });
     }
