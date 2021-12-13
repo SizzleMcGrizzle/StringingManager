@@ -18,6 +18,10 @@
     -fx-background-color: #343434;
 }
 
+.hover-background-2:focused {
+    -fx-background-color: #343434;
+}
+
 .line-fill-1 {
     -fx-stroke: #bdbdbd;
 }

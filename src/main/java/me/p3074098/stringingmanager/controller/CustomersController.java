@@ -1,12 +1,19 @@
 package me.p3074098.stringingmanager.controller;
 
+import javafx.beans.value.ObservableBooleanValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import me.p3074098.stringingmanager.Customer;
-import me.p3074098.stringingmanager.settings.Settings;
+import me.p3074098.stringingmanager.util.AnimationUtil;
+import me.p3074098.stringingmanager.util.Settings;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,26 +21,20 @@ import java.util.List;
 
 public class CustomersController extends AnchorPane {
     
-    @FXML
-    private AnchorPane anchor;
+    @FXML private AnchorPane anchor;
+    @FXML private Button addButton;
+    @FXML private FancyInput input1;
+    @FXML private FancyInput input2;
+    @FXML private FancyInput input3;
+    @FXML private FancyInput input4;
+    @FXML private TableView<Customer> customerTable;
+    @FXML private TableColumn<Customer, String> emailColumn;
+    @FXML private TableColumn<Customer, String> firstNameColumn;
+    @FXML private TableColumn<Customer, String> lastNameColumn;
+    @FXML private TableColumn<Customer, String> phoneColumn;
     
-    @FXML
-    private Button addButton;
-    
-    @FXML
-    private FancyInput input1;
-    
-    @FXML
-    private FancyInput input2;
-    
-    @FXML
-    private FancyInput input3;
-    
-    @FXML
-    private FancyInput input4;
-    
-    private FancyInput[] inputs;
-    private List<Customer> customers;
+    private final FancyInput[] inputs;
+    private final ObservableList<Customer> customers;
     
     public CustomersController() {
         
@@ -50,9 +51,7 @@ public class CustomersController extends AnchorPane {
             e.printStackTrace();
         }
         
-        customers = Settings.getDataConfig().getList("customers", new ArrayList<>());
-    
-        System.out.println(customers);
+        customers = FXCollections.observableList(Settings.getDataConfig().getList("customers", new ArrayList<>()));
         
         input1.setNextTarget(input2.getTextField());
         input2.setPreviousTarget(input1.getTextField());
@@ -82,7 +81,14 @@ public class CustomersController extends AnchorPane {
         inputs = new FancyInput[]{input1, input2, input3, input4};
     
         Settings.registerSaveTask(config -> config.set("customers", customers));
-        
+
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+        customerTable.setItems(customers);
+
         setListeners();
     }
     
@@ -106,6 +112,14 @@ public class CustomersController extends AnchorPane {
             }
             
             customers.add(customer);
+        });
+
+        addButton.focusedProperty().addListener(object -> {
+            if(((ObservableBooleanValue) object).get())
+                AnimationUtil.animateBorder(addButton);
+            else {
+                AnimationUtil.stopAnimateBorder(addButton, "transparent");
+            }
         });
     }
 

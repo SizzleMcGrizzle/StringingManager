@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import me.p3074098.stringingmanager.settings.Settings;
+import me.p3074098.stringingmanager.util.Settings;
 
 import java.io.IOException;
 

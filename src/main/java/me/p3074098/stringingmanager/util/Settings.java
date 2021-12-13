@@ -1,9 +1,9 @@
-package me.p3074098.stringingmanager.settings;
+package me.p3074098.stringingmanager.util;
 
 import me.p3074098.bukkitserializationmock.ConfigurationSection;
 import me.p3074098.bukkitserializationmock.ConfigurationSerialization;
-import me.p3074098.bukkitserializationmock.FileUtil;
 import me.p3074098.bukkitserializationmock.YamlConfiguration;
+import me.p3074098.bukkitserializationmock.util.FileUtil;
 import me.p3074098.stringingmanager.Customer;
 import me.p3074098.stringingmanager.Transaction;
 
