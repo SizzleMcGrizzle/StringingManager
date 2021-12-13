@@ -6,39 +6,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import me.p3074098.stringingmanager.controller.BurgerIconController?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="background-0" stylesheets="@../lightTheme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.p3074098.stringingmanager.controller.ApplicationController">
+<AnchorPane fx:id="base" prefHeight="600.0" prefWidth="800.0" stylesheets="@../lightTheme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.p3074098.stringingmanager.controller.ApplicationController">
    <children>
-      <HBox fx:id="root" prefHeight="600.0" prefWidth="800.0" styleClass="background-0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox fx:id="menuBox" prefHeight="600.0" prefWidth="300.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="600.0" prefWidth="250.0">
-               <styleClass>
-                  <String fx:value="background-1" />
-                  <String fx:value="drop-shadow-0" />
-               </styleClass>
+            <VBox alignment="CENTER" prefHeight="600.0" prefWidth="300.0">
                <children>
-                  <Label fx:id="modeButton" alignment="CENTER" prefHeight="130.0" prefWidth="130.0" text="Light Mode">
-                     <styleClass>
-                        <String fx:value="text-fill-1" />
-                        <String fx:value="drop-shadow-0" />
-                        <String fx:value="border-radius-1" />
-                        <String fx:value="background-2" />
-                     </styleClass>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
                   <Label fx:id="transactionsButton" alignment="CENTER" prefHeight="130.0" prefWidth="130.0" text="Transactions">
                      <styleClass>
                         <String fx:value="text-fill-1" />
+                        <String fx:value="hover-background-2" />
                         <String fx:value="drop-shadow-0" />
                         <String fx:value="border-radius-1" />
                         <String fx:value="background-2" />
@@ -56,6 +38,7 @@
                   <Label fx:id="customersButton" alignment="CENTER" prefHeight="130.0" prefWidth="130.0" text="Customers">
                      <styleClass>
                         <String fx:value="text-fill-1" />
+                        <String fx:value="hover-background-2" />
                         <String fx:value="drop-shadow-0" />
                         <String fx:value="border-radius-1" />
                         <String fx:value="background-2" />
@@ -73,6 +56,7 @@
                   <Label fx:id="statisticsButton" alignment="CENTER" prefHeight="130.0" prefWidth="130.0" text="Statistics">
                      <styleClass>
                         <String fx:value="text-fill-1" />
+                        <String fx:value="hover-background-2" />
                         <String fx:value="drop-shadow-0" />
                         <String fx:value="border-radius-1" />
                         <String fx:value="background-2" />
@@ -88,8 +72,34 @@
                      </cursor>
                   </Label>
                </children>
+               <styleClass>
+                  <String fx:value="background-1" />
+                  <String fx:value="drop-shadow-0" />
+               </styleClass>
             </VBox>
          </children>
       </HBox>
+      <Pane prefHeight="71.0" prefWidth="254.0">
+         <children>
+            <HBox fx:id="modeButton" layoutX="77.0" layoutY="11.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0">
+               <styleClass>
+                  <String fx:value="background-2" />
+                  <String fx:value="border-radius-1" />
+                  <String fx:value="hover-background-2" />
+               </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </HBox>
+             <BurgerIconController fx:id="burgerIcon" layoutX="14.0" layoutY="11.0" maxHeight="50.0" maxWidth="50.0" minWidth="50.0" prefHeight="53.0" prefWidth="50.0" styleClass="drop-shadow-0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+             </BurgerIconController>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

@@ -10,6 +10,18 @@
     -fx-background-color: #262626;
 }
 
+.green-accent {
+    -fx-background-color: #00be00;
+}
+
+.hover-background-2:hover {
+    -fx-background-color: #343434;
+}
+
+.line-fill-1 {
+    -fx-stroke: #bdbdbd;
+}
+
 .text-fill-0 {
     -fx-text-fill: #ffffff;
 }
@@ -36,4 +48,28 @@
 
 .drop-shadow-0 {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 20, 0.1, 0.0, 0.0);
+}
+
+.fancy-input-selected-text-fill {
+    -fx-text-fill: #2CA1FF;
+}
+
+.fancy-input-selected-border-fill {
+    -fx-border-color: #2CA1FF;
+}
+
+.fancy-input-warn-text-fill {
+    -fx-text-fill: red;
+}
+
+.fancy-input-warn-border-fill {
+    -fx-border-color: red;
+}
+
+.fancy-input-normal-text-fill {
+    -fx-text-fill: #e3e3e3;
+}
+
+.fancy-input-normal-border-fill {
+    -fx-border-color: #e3e3e3;
 }

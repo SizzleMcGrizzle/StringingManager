@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="anchor" prefHeight="80.0" prefWidth="300.0" styleClass="background-1" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox fx:id="fieldBox" layoutX="10.0" layoutY="18.0" prefHeight="44.0" prefWidth="281.0" style="-fx-border-radius: 5px;" styleClass="border-color-1">
+         <children>
+            <TextField fx:id="textField" prefHeight="30.0" prefWidth="268.0" promptText="Prompt">
+               <HBox.margin>
+                  <Insets bottom="6.0" left="10.0" right="10.0" top="6.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="background-1" />
+                  <String fx:value="text-fill-1" />
+               </styleClass>
+            </TextField>
+         </children>
+      </HBox>
+      <Label fx:id="label" contentDisplay="CENTER" layoutX="19.0" layoutY="10.0" prefHeight="15.0" prefWidth="59.0" text="Label">
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+         <font>
+            <Font size="10.0" />
+         </font>
+         <styleClass>
+            <String fx:value="background-1" />
+            <String fx:value="text-fill-1" />
+         </styleClass>
+      </Label>
+   </children>
+   <cursor>
+      <Cursor fx:constant="TEXT" />
+   </cursor>
+</Pane>

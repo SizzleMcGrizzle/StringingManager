@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+
+<Pane maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Line fx:id="line1" endX="28.0" layoutX="11.0" layoutY="15.0" strokeLineCap="ROUND" strokeWidth="3.0" styleClass="line-fill-1" />
+      <Line fx:id="line2" endX="28.0" layoutX="11.0" layoutY="25.0" strokeLineCap="ROUND" strokeWidth="3.0" styleClass="line-fill-1" />
+      <Line fx:id="line3" endX="28.0" layoutX="11.0" layoutY="35.0" strokeLineCap="ROUND" strokeWidth="3.0" styleClass="line-fill-1" />
+   </children>
+   <styleClass>
+      <String fx:value="background-2" />
+      <String fx:value="border-radius-1" />
+      <String fx:value="hover-background-2" />
+   </styleClass>
+</Pane>
