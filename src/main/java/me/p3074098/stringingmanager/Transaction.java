@@ -9,7 +9,6 @@ public class Transaction implements ConfigurationSerializable {
     private Customer customer;
     private String racket;
     
-    
     @Override
     public Map<String, Object> serialize() {
         return null;

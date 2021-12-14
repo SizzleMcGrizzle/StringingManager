@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import me.p3074098.stringingmanager.Customer;
 import me.p3074098.stringingmanager.util.AnimationUtil;
@@ -112,6 +113,7 @@ public class CustomersController extends AnchorPane {
             }
             
             customers.add(customer);
+            input1.getTextField().requestFocus();
         });
 
         addButton.focusedProperty().addListener(object -> {
@@ -121,6 +123,14 @@ public class CustomersController extends AnchorPane {
                 AnimationUtil.stopAnimateBorder(addButton, "transparent");
             }
         });
+
+        addButton.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER)
+                addButton.fire();
+        });
+
+
+        customerTable.setOnKeyPressed(e -> System.out.println("hi"));
     }
 
 }
