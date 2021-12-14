@@ -4,19 +4,29 @@ import javafx.beans.NamedArg;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.util.converter.DoubleStringConverter;
 
 import java.io.IOException;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FancyInput extends Pane {
 
@@ -34,6 +44,8 @@ public class FancyInput extends Pane {
     
     private Predicate<String> stringValidate;
     private Predicate<Double> doubleValidate;
+
+    private BiFunction<String, KeyCode, String> mapInput;
     
     public FancyInput(@NamedArg("labelDefault") String labelDefault,
                       @NamedArg("prefText") String preferredText,
@@ -82,6 +94,11 @@ public class FancyInput extends Pane {
                 }
             }
         });
+
+        textField.setOnKeyTyped(e -> {
+            if (mapInput != null)
+                textField.setText(mapInput.apply(textField.getText(), e.getCode()));
+        });
     }
     
     public void setNextTarget(Node nextTarget) {
@@ -99,7 +116,11 @@ public class FancyInput extends Pane {
     public void setValidateDouble(Predicate<Double> predicate) {
         this.doubleValidate = predicate;
     }
-    
+
+    public void setMapInput(BiFunction<String, KeyCode, String> mapInput) {
+        this.mapInput = mapInput;
+    }
+
     protected void select() {
         setColor("selected");
     }
