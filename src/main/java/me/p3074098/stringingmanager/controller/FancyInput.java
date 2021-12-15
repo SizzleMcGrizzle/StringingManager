@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,8 +50,6 @@ public class FancyInput extends Pane {
     
     private Predicate<String> stringValidate;
     private Predicate<Double> doubleValidate;
-
-    private BiFunction<String, KeyCode, String> mapInput;
     
     public FancyInput(@NamedArg("labelDefault") String labelDefault,
                       @NamedArg("prefText") String preferredText,
@@ -108,10 +107,18 @@ public class FancyInput extends Pane {
             }
         });
 
-        textField.setOnKeyTyped(e -> {
-            if (mapInput != null)
-                textField.setText(mapInput.apply(textField.getText(), e.getCode()));
-        });
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String text = change.getText();
+
+            if (getInputType().equals(Double.class))
+                if (!text.matches("[0-9]*")) {
+                    return null;
+                }
+
+            return change;
+        };
+        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
+        textField.setTextFormatter(textFormatter);
     }
 
     private void positionLabel() {
@@ -123,8 +130,8 @@ public class FancyInput extends Pane {
 
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.millis(100),
-                            new KeyValue(label.fontProperty(), Font.font(newTextSize)),
                             new KeyValue(label.layoutYProperty(), newY),
+                            new KeyValue(label.fontProperty(), Font.font(newTextSize)),
                             new KeyValue(textField.opacityProperty(), fieldOpacity))
             );
 
@@ -145,10 +152,6 @@ public class FancyInput extends Pane {
     
     public void setValidateDouble(Predicate<Double> predicate) {
         this.doubleValidate = predicate;
-    }
-
-    public void setMapInput(BiFunction<String, KeyCode, String> mapInput) {
-        this.mapInput = mapInput;
     }
 
     protected void select() {

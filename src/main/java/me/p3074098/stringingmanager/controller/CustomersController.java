@@ -17,6 +17,7 @@ import me.p3074098.stringingmanager.util.AnimationUtil;
 import me.p3074098.stringingmanager.util.Settings;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +64,11 @@ public class CustomersController extends AnchorPane {
         input3.setNextTarget(input4.getTextField());
         input4.setPreviousTarget(input3.getTextField());
         input4.setNextTarget(addButton);
-        
+
+        input3.setValidateDouble(d -> {
+            return String.valueOf(BigDecimal.valueOf(d)).length() == 12;
+        });
+
         input4.setValidateString(s -> {
             String[] split = s.split("@");
             
