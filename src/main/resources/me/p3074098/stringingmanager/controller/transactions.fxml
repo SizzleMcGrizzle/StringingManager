@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import me.p3074098.stringingmanager.controller.FancyInput?>
 
 <AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="background-0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
@@ -16,39 +12,23 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="300.0" styleClass="background-1">
                <children>
-                  <FancyInput fx:id="input1" labelDefault="First Name" prefHeight="80.0" prefText="John"
-                              prefWidth="300.0" validateType="java.lang.String">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="150.0">
+                           <children>
+                              <FancyInput inputType="java.lang.String" labelDefault="Customer Name" minHeight="80.0" minWidth="66.0" prefHeight="80.0" prefWidth="266.0" promptText="John Smith" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="100.0" prefWidth="150.0">
+                           <children>
+                              <FancyInput labelText="Racket Name" promptText="Wilson Blade 98" />
+                           </children></VBox>
+                     </children>
                      <VBox.margin>
                         <Insets top="200.0" />
-                     </VBox.margin></FancyInput>
-                  <FancyInput fx:id="input2" labelDefault="Last Name" prefText="Smith" validateType="java.lang.String">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin></FancyInput>
-                  <FancyInput fx:id="input3" labelDefault="Preferred Phone" prefText="913-724-864"
-                              validateType="java.lang.String">
-                     <VBox.margin>
-                        <Insets />
                      </VBox.margin>
-                  </FancyInput>
-                  <FancyInput fx:id="input4" labelDefault="Preferred Email" prefText="johnsmith@gmail.com" validateType="java.lang.String" />
-                  <Button fx:id="addButton" mnemonicParsing="false" prefHeight="53.0" prefWidth="281.0" text="Add">
-                     <styleClass>
-                        <String fx:value="background-2" />
-                        <String fx:value="text-fill-1" />
-                     </styleClass>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-            </VBox>
+                  </HBox>
+               </children></VBox>
             <VBox prefHeight="600.0" prefWidth="500.0" />
          </children>
       </HBox>

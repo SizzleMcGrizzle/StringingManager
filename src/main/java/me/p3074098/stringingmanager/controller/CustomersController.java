@@ -35,9 +35,10 @@ public class CustomersController extends AnchorPane {
     @FXML private TableColumn<Customer, String> phoneColumn;
     
     private final FancyInput[] inputs;
-    private final ObservableList<Customer> customers;
+
+    private ApplicationController applicationController;
     
-    public CustomersController() {
+    public CustomersController(ApplicationController applicationController) {
         
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("customers.fxml"));
@@ -51,9 +52,10 @@ public class CustomersController extends AnchorPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
-        customers = FXCollections.observableList(Settings.getDataConfig().getList("customers", new ArrayList<>()));
-        
+
+        this.applicationController = applicationController;
+
+        input1.setPreviousTarget(applicationController.getModeButton());
         input1.setNextTarget(input2.getTextField());
         input2.setPreviousTarget(input1.getTextField());
         input2.setNextTarget(input3.getTextField());
@@ -80,15 +82,13 @@ public class CustomersController extends AnchorPane {
         });
         
         inputs = new FancyInput[]{input1, input2, input3, input4};
-    
-        Settings.registerSaveTask(config -> config.set("customers", customers));
 
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-        customerTable.setItems(customers);
+        customerTable.setItems(Settings.CUSTOMERS);
 
         setListeners();
     }
@@ -112,7 +112,7 @@ public class CustomersController extends AnchorPane {
                 input.clearText();
             }
             
-            customers.add(customer);
+            Settings.CUSTOMERS.add(customer);
             input1.getTextField().requestFocus();
         });
 

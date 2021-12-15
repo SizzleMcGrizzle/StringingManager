@@ -24,13 +24,13 @@ import java.util.ResourceBundle;
 public class ApplicationController implements Initializable {
     
     @FXML
-     Label customersButton;
+    private Label customersButton;
     
     @FXML
-     Label statisticsButton;
+    private Label statisticsButton;
     
     @FXML
-     Label transactionsButton;
+    private Label transactionsButton;
     
     @FXML
     private BurgerIconController burgerIcon;
@@ -80,7 +80,7 @@ public class ApplicationController implements Initializable {
         
         contentPane.setViewOrder(1);
         
-        contentPane.getChildren().add(new CustomersController());
+        contentPane.getChildren().add(new CustomersController(this));
         
         setListeners();
     }
@@ -118,5 +118,13 @@ public class ApplicationController implements Initializable {
                             new KeyValue(menuBox.translateXProperty(), x)));
             timeline.play();
         });
+    }
+
+    public BurgerIconController getBurgerIcon() {
+        return burgerIcon;
+    }
+
+    public HBox getModeButton() {
+        return modeButton;
     }
 }

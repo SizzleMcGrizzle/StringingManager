@@ -1,5 +1,7 @@
 package me.p3074098.stringingmanager.util;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import me.p3074098.bukkitserializationmock.ConfigurationSection;
 import me.p3074098.bukkitserializationmock.ConfigurationSerialization;
 import me.p3074098.bukkitserializationmock.YamlConfiguration;
@@ -24,6 +26,9 @@ public class Settings {
     
     public static String CURRENT_STYLESHEET;
     public static List<String> ALL_STYLESHEETS;
+
+    public static ObservableList<Customer> CUSTOMERS;
+    public static ObservableList<Transaction> TRANSACTIONS;
     
     private static YamlConfiguration DATA_CONFIG;
     
@@ -48,6 +53,14 @@ public class Settings {
         DATA_CONFIG = new YamlConfiguration(dataFile);
         
         DATA_CONFIG.load();
+
+        CUSTOMERS = FXCollections.observableList(DATA_CONFIG.getList("customers", new ArrayList<>()));
+        TRANSACTIONS = FXCollections.observableList(DATA_CONFIG.getList("transactions", new ArrayList<>()));
+
+        saveTasks.add(c -> {
+            c.set("customers", CUSTOMERS);
+            c.set("transactions", TRANSACTIONS);
+        });
     }
     
     public static void registerSaveTask(Consumer<ConfigurationSection> consumer) {

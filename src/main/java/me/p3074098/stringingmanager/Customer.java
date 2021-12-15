@@ -5,6 +5,7 @@ import me.p3074098.bukkitserializationmock.ConfigurationSerializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Customer implements ConfigurationSerializable {
 
@@ -12,12 +13,14 @@ public class Customer implements ConfigurationSerializable {
     private final SimpleStringProperty lastName;
     private final SimpleStringProperty phone;
     private final SimpleStringProperty email;
+    private final UUID id;
     
     public Customer(String firstName, String lastName, String phone, String email) {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.phone = new SimpleStringProperty(phone);
         this.email = new SimpleStringProperty(email);
+        this.id = UUID.randomUUID();
     }
     
     public Customer(Map<String, Object> map) {
@@ -25,6 +28,7 @@ public class Customer implements ConfigurationSerializable {
         this.lastName = new SimpleStringProperty((String) map.get("lastName"));
         this.phone = new SimpleStringProperty((String) map.get("phone"));
         this.email = new SimpleStringProperty((String) map.get("email"));
+        this.id = UUID.fromString((String) map.getOrDefault("id", UUID.randomUUID().toString()));
     }
     
     
@@ -36,6 +40,7 @@ public class Customer implements ConfigurationSerializable {
         map.put("lastName", lastName.get());
         map.put("phone", phone.get());
         map.put("email", email.get());
+        map.put("id", id.toString());
         
         return map;
     }
@@ -54,5 +59,9 @@ public class Customer implements ConfigurationSerializable {
     
     public String getEmail() {
         return email.get();
+    }
+
+    public UUID getId() {
+        return id;
     }
 }

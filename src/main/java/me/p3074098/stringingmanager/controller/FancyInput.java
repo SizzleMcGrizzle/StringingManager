@@ -1,7 +1,11 @@
 package me.p3074098.stringingmanager.controller;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.NamedArg;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableBooleanValue;
@@ -14,6 +18,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.function.Predicate;
@@ -25,9 +31,9 @@ public class FancyInput extends Pane {
     @FXML private Label label;
     @FXML private TextField textField;
     
-    private StringProperty defaultLabel = new SimpleStringProperty(this, "defaultLabel");
-    
-    private Class<?> type;
+    private StringProperty labelText;
+    private StringProperty promptText;
+    private ObjectProperty<Class<?>> inputType;
     
     private Node nextTarget;
     private Node previousTarget;
@@ -48,16 +54,23 @@ public class FancyInput extends Pane {
 
             this.getChildren().add(pane);
 
+            labelText = new SimpleStringProperty(this, labelDefault);
+            promptText =  new SimpleStringProperty(this, preferredText);
+            inputType = new SimpleObjectProperty<>(type);
+
+
+            fieldBox.prefWidthProperty().bind(pane.prefWidthProperty().subtract(20));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        //label.textProperty().bind(defaultLabel);
+        label.textProperty().bind(labelText);
+        textField.promptTextProperty().bind(promptText);
+        textField.setStyle("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);");
+
         setLabelText(labelDefault);
 
-        this.type = type;
-        
-        textField.setPromptText(preferredText);
         
         anchor.setOnMouseClicked(e -> textField.requestFocus());
         
@@ -72,16 +85,34 @@ public class FancyInput extends Pane {
 
         // Set color to blue if the text field is selected
         textField.focusedProperty().addListener(object -> {
+            positionLabel();
             if(((ObservableBooleanValue) object).get())
                 select();
             else {
-                if (type.equals(String.class)) {
+                if (getInputType().equals(String.class)) {
                     validateString();
-                } else if (type.equals(Double.class)) {
+                } else if (getInputType().equals(Double.class)) {
                     validateDouble();
                 }
             }
         });
+    }
+
+    private void positionLabel() {
+        boolean raise = textField.isFocused() || !textField.getText().isEmpty();
+
+        double newY = raise ? 10 : 30;
+        double newTextSize = raise ? 10 : 15;
+        double fieldOpacity = raise ? 100 : 0;
+
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.millis(100),
+                            new KeyValue(label.fontProperty(), Font.font(newTextSize)),
+                            new KeyValue(label.layoutYProperty(), newY),
+                            new KeyValue(textField.opacityProperty(), fieldOpacity))
+            );
+
+            timeline.play();
     }
     
     public void setNextTarget(Node nextTarget) {
@@ -138,11 +169,6 @@ public class FancyInput extends Pane {
         clearColor();
         return textField.getText();
     }
-
-    public void setLabelText(String text) {
-        label.setText(text);
-        label.setPrefWidth(Region.USE_COMPUTED_SIZE);
-    }
     
     protected void adjustVisibility(boolean show) {
         fieldBox.setVisible(show);
@@ -177,11 +203,41 @@ public class FancyInput extends Pane {
         return textField;
     }
     
-    public StringProperty defaultLabelProperty() {
-        return defaultLabel;
+    public StringProperty labelTextProperty() {
+        return labelText;
     }
-    
-    public String getDefaultLabel() {
-        return defaultLabel.get();
+
+    public StringProperty promptTextProperty() {
+        return promptText;
+    }
+
+    public String getLabelText() {
+        return labelText.get();
+    }
+
+    public String getPromptText() {
+        return promptText.get();
+    }
+
+    public void setPromptText(String promptText) {
+        this.promptText.set(promptText);
+    }
+
+    public void setLabelText(String text) {
+        labelText.set(text);
+        label.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        positionLabel();
+    }
+
+    public ObjectProperty<Class<?>> inputTypeProperty() {
+        return inputType;
+    }
+
+    public void setInputType(Class<?> inputType) {
+        this.inputType.set(inputType);
+    }
+
+    public Class<?> getInputType() {
+        return inputType.get();
     }
 }

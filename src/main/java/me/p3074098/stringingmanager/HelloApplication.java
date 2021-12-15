@@ -27,7 +27,7 @@ public class HelloApplication extends Application {
     }
     
     @Override
-    public void stop() throws Exception {
+    public void stop() {
         Settings.save();
     }
     
