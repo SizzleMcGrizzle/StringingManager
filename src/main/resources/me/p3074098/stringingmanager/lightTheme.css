@@ -6,7 +6,7 @@
     -fx-green-accent: #8af88a;
     -fx-text-color-0: black;
     -fx-text-color-1: #333;
-    -fx-drop-shadow-0: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 20, 0.1, 0.0, 0.0);
+    -fx-drop-shadow-0: dropShadow(gaussian, rgba(0, 0, 0, 0.1), 20, 0.1, 0.0, 0.0);
     -fx-fancy-input-select-color: #2CA1FF;
     -fx-fancy-input-warn-color: red;
 }
