@@ -53,38 +53,39 @@ public class BurgerIconController extends Pane {
     }
     
     private void setListeners() {
-        line1.getParent().setOnMouseClicked(event -> {
-            
-            collapsed = !collapsed;
-    
-            onClickHandlers.forEach(Runnable::run);
-            
-            double endY = 0;
-            double opacity = 1;
-            double startX = 0;
-            double layoutX = 11;
-            
-            if (collapsed) {
-                endY = 20;
-                opacity = 0;
-                startX = 4.5;
-                layoutX = 8.5;
-            }
-            
-    
-            Timeline timeline  = new Timeline();
-            timeline.setCycleCount(1);
-            timeline.getKeyFrames().addAll(
-                    new KeyFrame(Duration.millis(250),
-                            new KeyValue(line1.endYProperty(), endY),
-                            new KeyValue(line1.startXProperty(), startX),
-                            new KeyValue(line3.startXProperty(), startX),
-                            new KeyValue(line1.layoutXProperty(), layoutX),
-                            new KeyValue(line3.layoutXProperty(), layoutX),
-                            new KeyValue(line2.opacityProperty(), opacity),
-                            new KeyValue(line3.endYProperty(), -1*endY)));
-            timeline.play();
-        });
+        line1.getParent().setOnMouseClicked(event -> setCollapsed(!isCollapsed()));
+    }
+
+    public void setCollapsed(boolean c) {
+        collapsed = c;
+
+        onClickHandlers.forEach(Runnable::run);
+
+        double endY = 0;
+        double opacity = 1;
+        double startX = 0;
+        double layoutX = 11;
+
+        if (collapsed) {
+            endY = 20;
+            opacity = 0;
+            startX = 4.5;
+            layoutX = 8.5;
+        }
+
+
+        Timeline timeline  = new Timeline();
+        timeline.setCycleCount(1);
+        timeline.getKeyFrames().addAll(
+                new KeyFrame(Duration.millis(250),
+                        new KeyValue(line1.endYProperty(), endY),
+                        new KeyValue(line1.startXProperty(), startX),
+                        new KeyValue(line3.startXProperty(), startX),
+                        new KeyValue(line1.layoutXProperty(), layoutX),
+                        new KeyValue(line3.layoutXProperty(), layoutX),
+                        new KeyValue(line2.opacityProperty(), opacity),
+                        new KeyValue(line3.endYProperty(), -1*endY)));
+        timeline.play();
     }
     
     public boolean isCollapsed() {

@@ -131,6 +131,7 @@ public class ApplicationController implements Initializable {
 
     public void setCurrentController(Node currentController) {
         this.currentController.set(currentController);
+        burgerIcon.setCollapsed(false);
     }
 
     public BurgerIconController getBurgerIcon() {

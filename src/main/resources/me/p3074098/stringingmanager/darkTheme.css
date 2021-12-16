@@ -3,11 +3,11 @@
     -fx-color-1: #3b3b3b;
     -fx-color-2: #262626;
     -fx-hover-2: #343434;
-    -fx-color-accent: #5100c9;
+    -fx-color-accent: #842cff;
     -fx-text-color-0: white;
     -fx-text-color-1: #e3e3e3;
     -fx-drop-shadow-0: dropShadow(gaussian, rgba(0, 0, 0, 0.1), 20, 0.1, 0.0, 0.0);
-    -fx-fancy-input-select-color: #2CA1FF;
+    -fx-fancy-input-select-color: #842cff;
     -fx-fancy-input-warn-color: red;
 }
 

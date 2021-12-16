@@ -42,6 +42,7 @@
             <groupId>me.p3074098</groupId>
             <artifactId>bukkitserializationmock</artifactId>
             <version>1.0.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -76,6 +77,14 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <configuration>
+                    <!-- This is an app, so we don't want to install it in the local Maven repository -->
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>

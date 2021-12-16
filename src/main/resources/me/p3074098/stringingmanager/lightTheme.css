@@ -159,6 +159,7 @@
 
 .table-view .column-header .label {
     -fx-text-fill: -fx-text-color-1;
+    -fx-alignment: CENTER_LEFT;
 }
 
 .text-input, .text-input:focused {
