@@ -3,7 +3,7 @@
     -fx-color-1: #3b3b3b;
     -fx-color-2: #262626;
     -fx-hover-2: #343434;
-    -fx-green-accent: #00be00;
+    -fx-color-accent: #5100c9;
     -fx-text-color-0: white;
     -fx-text-color-1: #e3e3e3;
     -fx-drop-shadow-0: dropShadow(gaussian, rgba(0, 0, 0, 0.1), 20, 0.1, 0.0, 0.0);
@@ -13,18 +13,22 @@
 
 .background-0 {
     -fx-background-color: -fx-color-0;
+    -fx-fill: -fx-color-0;
 }
 
 .background-1 {
     -fx-background-color: -fx-color-1;
+    -fx-fill: -fx-color-1;
 }
 
 .background-2 {
     -fx-background-color: -fx-color-2;
+    -fx-fill: -fx-color-2;
 }
 
 .green-accent {
-    -fx-background-color: -fx-green-accent;
+    -fx-background-color: -fx-color-accent;
+    -fx-fill: -fx-color-accent;
 }
 
 .hover-background-2:hover {
@@ -114,12 +118,12 @@
     -fx-background-color: #93f9b911;
 }
 .table-row-cell:odd{
-    -fx-background-color: derive(-fx-color-1, 80%);
+    -fx-background-color: derive(-fx-color-1, 50%);
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
 .table-row-cell:even{
-    -fx-background-color: derive(-fx-color-1, 50%);
+    -fx-background-color: derive(-fx-color-1, 40%);
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
@@ -146,8 +150,8 @@
     -fx-background-color:  -fx-color-1;
 }
 
-.table-row-cell:focused {
-    -fx-background-color: -fx-green-accent;
+.table-row-cell:focused, .table-row-cell:selected {
+    -fx-background-color: -fx-color-accent;
 }
 
 .table-view .column-header .label {

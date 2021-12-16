@@ -4,7 +4,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.NamedArg;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -41,9 +43,11 @@ public class FancyInput extends Pane {
     @FXML private Label label;
     @FXML private TextField textField;
     
-    private StringProperty labelText;
-    private StringProperty promptText;
-    private ObjectProperty<Class<?>> inputType;
+    private IntegerProperty maxChars = new SimpleIntegerProperty(Integer.MAX_VALUE);
+    private IntegerProperty minChars = new SimpleIntegerProperty(0);
+    private StringProperty labelText = new SimpleStringProperty("Label");
+    private StringProperty promptText = new SimpleStringProperty("Prompt");
+    private ObjectProperty<Class<?>> inputType = new SimpleObjectProperty<>(String.class);
     
     private Node nextTarget;
     private Node previousTarget;
@@ -51,9 +55,30 @@ public class FancyInput extends Pane {
     private Predicate<String> stringValidate;
     private Predicate<Double> doubleValidate;
     
-    public FancyInput(@NamedArg("labelDefault") String labelDefault,
-                      @NamedArg("prefText") String preferredText,
-                      @NamedArg("validateType") Class<?> type) {
+    public FancyInput(@NamedArg("labelText") String labelText,
+                      @NamedArg("promptText") String promptText) {
+        this(labelText, promptText, String.class);
+    }
+    
+    public FancyInput(@NamedArg("labelText") String labelText,
+                      @NamedArg("promptText") String promptText,
+                      @NamedArg("inputType") Class<?> inputType) {
+        this(labelText, promptText, inputType, Integer.MAX_VALUE, 0);
+    }
+    
+    
+    public FancyInput(@NamedArg("labelText") String labelText,
+                      @NamedArg("promptText") String promptText,
+                      @NamedArg("maxChars") int maxChars,
+                      @NamedArg("minChars") int minChars) {
+        this(labelText, promptText, String.class, maxChars, minChars);
+    }
+    
+    public FancyInput(@NamedArg("labelText") String labelText,
+                      @NamedArg("promptText") String promptText,
+                      @NamedArg("inputType") Class<?> inputType,
+                      @NamedArg("maxChars") int maxChars,
+                      @NamedArg("minChars") int minChars) {
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("fancyInput.fxml"));
@@ -64,22 +89,25 @@ public class FancyInput extends Pane {
 
             this.getChildren().add(pane);
 
-            labelText = new SimpleStringProperty(this, labelDefault);
-            promptText =  new SimpleStringProperty(this, preferredText);
-            inputType = new SimpleObjectProperty<>(type);
 
-
-            fieldBox.prefWidthProperty().bind(pane.prefWidthProperty().subtract(20));
-
+            pane.prefWidthProperty().bind(prefWidthProperty());
+            fieldBox.prefWidthProperty().bind(prefWidthProperty().subtract(20));
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        label.textProperty().bind(labelText);
-        textField.promptTextProperty().bind(promptText);
+    
+        this.maxChars = new SimpleIntegerProperty(maxChars);
+        this.minChars = new SimpleIntegerProperty(minChars);
+        this.labelText = new SimpleStringProperty(labelText);
+        this.promptText = new SimpleStringProperty(promptText);
+        this.inputType = new SimpleObjectProperty<>(inputType);
+        
+        label.textProperty().bind(this.labelText);
+        textField.promptTextProperty().bind(this.promptText);
         textField.setStyle("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);");
-
-        setLabelText(labelDefault);
+        
+        setLabelText(getLabelText());
 
         
         anchor.setOnMouseClicked(e -> textField.requestFocus());
@@ -114,6 +142,9 @@ public class FancyInput extends Pane {
                 if (!text.matches("[0-9]*")) {
                     return null;
                 }
+            
+            if (textField.getText().length() == this.maxChars.get())
+                change.setText("");
 
             return change;
         };
@@ -125,7 +156,7 @@ public class FancyInput extends Pane {
         boolean raise = textField.isFocused() || !textField.getText().isEmpty();
 
         double newY = raise ? 10 : 30;
-        double newTextSize = raise ? 10 : 15;
+        double newTextSize = raise ? 10 : 14;
         double fieldOpacity = raise ? 100 : 0;
 
             Timeline timeline = new Timeline(
@@ -177,9 +208,16 @@ public class FancyInput extends Pane {
         label.getStyleClass().add("fancy-input-" + className + "-text-fill");
         fieldBox.getStyleClass().add("fancy-input-" + className + "-border-fill");
     }
+    
+    private boolean validateInternal() {
+        if (textField.getText().isEmpty())
+            return false;
+        
+        return textField.getText().length() >= minChars.get();
+    }
 
     public String validateString() {
-        if (textField.getText().isEmpty()) {
+        if (!validateInternal()) {
             warn();
             return null;
         }
@@ -201,7 +239,7 @@ public class FancyInput extends Pane {
     }
 
     public Double validateDouble() {
-        if (textField.getText().isEmpty()) {
+        if (!validateInternal()) {
             warn();
             return null;
         }
@@ -262,5 +300,29 @@ public class FancyInput extends Pane {
 
     public Class<?> getInputType() {
         return inputType.get();
+    }
+    
+    public int getMaxChars() {
+        return maxChars.get();
+    }
+    
+    public IntegerProperty maxCharsProperty() {
+        return maxChars;
+    }
+    
+    public void setMaxChars(int maxChars) {
+        this.maxChars.set(maxChars);
+    }
+    
+    public void setMinChars(int minChars) {
+        this.minChars.set(minChars);
+    }
+    
+    public IntegerProperty minCharsProperty() {
+        return minChars;
+    }
+    
+    public int getMinChars() {
+        return minChars.get();
     }
 }

@@ -18,20 +18,20 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="300.0" styleClass="background-1">
                <children>
-                  <FancyInput fx:id="input1" labelDefault="First Name" prefHeight="80.0" prefText="John" prefWidth="300.0" validateType="java.lang.String">
+                  <FancyInput fx:id="input1" inputType="java.lang.String" labelText="First Name" prefHeight="65.0" prefWidth="300.0" promptText="John">
                      <VBox.margin>
-                        <Insets top="200.0" />
+                        <Insets top="250.0" />
                      </VBox.margin></FancyInput>
-                  <FancyInput fx:id="input2" labelDefault="Last Name" prefText="Smith" validateType="java.lang.String">
+                  <FancyInput fx:id="input2" labelText="Last Name" prefHeight="65.0" prefWidth="300.0" promptText="Smith">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin></FancyInput>
-                  <FancyInput fx:id="input3" labelDefault="Preferred Phone" prefText="913-724-864" validateType="java.lang.Double">
+                  <FancyInput fx:id="input3" inputType="java.lang.Double" labelText="Preferred Phone" maxChars="10" minChars="10" prefHeight="65.0" prefWidth="300.0" promptText="913-724-864">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </FancyInput>
-                  <FancyInput fx:id="input4" labelDefault="Preferred Email" prefText="johnsmith@gmail.com" validateType="java.lang.String" />
+                  <FancyInput fx:id="input4" labelText="Preferred Email" prefHeight="75.0" prefWidth="300.0" promptText="johnsmith@gmail.com" />
                   <Button fx:id="addButton" mnemonicParsing="false" prefHeight="53.0" prefWidth="281.0" text="Add">
                      <styleClass>
                         <String fx:value="background-2" />
@@ -52,7 +52,7 @@
             </VBox>
             <VBox prefHeight="600.0" prefWidth="500.0">
                <children>
-                  <TableView fx:id="customerTable" prefHeight="600.0" prefWidth="508.0">
+                  <TableView fx:id="customerTable" editable="true" prefHeight="600.0" prefWidth="508.0">
                     <columns>
                       <TableColumn fx:id="firstNameColumn" prefWidth="101.0" styleClass="text-fill-1" text="First Name" />
                       <TableColumn fx:id="lastNameColumn" prefWidth="103.0" styleClass="text-fill-1" text="Last Name" />

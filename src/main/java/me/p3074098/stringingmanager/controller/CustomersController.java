@@ -7,10 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import me.p3074098.stringingmanager.Customer;
 import me.p3074098.stringingmanager.util.AnimationUtil;
@@ -64,10 +66,8 @@ public class CustomersController extends AnchorPane {
         input3.setNextTarget(input4.getTextField());
         input4.setPreviousTarget(input3.getTextField());
         input4.setNextTarget(addButton);
-
-        input3.setValidateDouble(d -> {
-            return String.valueOf(BigDecimal.valueOf(d)).length() == 12;
-        });
+        
+        input3.setValidateDouble(d -> String.valueOf(BigDecimal.valueOf(d)).length() == 10);
 
         input4.setValidateString(s -> {
             String[] split = s.split("@");
@@ -111,7 +111,10 @@ public class CustomersController extends AnchorPane {
                 if (s == null)
                     return;
             
-            Customer customer = new Customer(args[0], args[1], args[2], args[3]);
+            Customer customer = new Customer(args[0],
+                    args[1],
+                    args[2].substring(0, 3) + "-" + args[2].substring(3,6) + "-" + args[2].substring(6,10),
+                    args[3]);
     
             for (FancyInput input : inputs) {
                 input.clearText();
@@ -135,7 +138,12 @@ public class CustomersController extends AnchorPane {
         });
 
 
-        customerTable.setOnKeyPressed(e -> System.out.println("hi"));
+        customerTable.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.DELETE)
+                Settings.CUSTOMERS.removeAll(customerTable.getSelectionModel().getSelectedItems());
+        });
+    
+        customerTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
 }

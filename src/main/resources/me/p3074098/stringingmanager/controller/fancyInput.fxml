@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="anchor" minHeight="80.0" minWidth="100.0" prefHeight="80.0" prefWidth="300.0" styleClass="background-1" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="anchor" minHeight="65.0" minWidth="100.0" prefHeight="65.0" prefWidth="300.0" styleClass="background-1" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox fx:id="fieldBox" layoutX="10.0" layoutY="18.0" maxHeight="2000.0" maxWidth="2000.0" minHeight="44.0" minWidth="80.0" prefHeight="44.0" prefWidth="281.0" style="-fx-border-radius: 5px;" styleClass="border-color-1">
          <children>

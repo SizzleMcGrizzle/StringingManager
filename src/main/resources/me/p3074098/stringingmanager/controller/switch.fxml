@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="65.0" minWidth="100.0" prefHeight="65.0" prefWidth="300.0" styleClass="background-1" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox fx:id="fieldBox" alignment="CENTER_LEFT" layoutX="10.0" layoutY="18.0" maxHeight="2000.0" maxWidth="2000.0" minHeight="44.0" minWidth="80.0" prefHeight="44.0" prefWidth="281.0" style="-fx-border-radius: 5px;">
+         <children>
+            <Label fx:id="label" prefHeight="42.0" prefWidth="191.0" styleClass="text-fill-1" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Pane fx:id="switchPane" prefHeight="32.0" prefWidth="64.0" style="-fx-background-radius: 16px;">
+               <HBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </HBox.margin>
+               <children>
+                  <Circle fx:id="switchCircle" fill="#2395ff" layoutX="16.0" layoutY="16.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="green-accent" />
+               </children>
+               <styleClass>
+                  <String fx:value="background-2" />
+                  <String fx:value="drop-shadow-0" />
+               </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+         </children>
+         <styleClass>
+            <String fx:value="border-color-1" />
+            <String fx:value="drop-shadow-0" />
+         </styleClass>
+      </HBox>
+   </children>
+</Pane>

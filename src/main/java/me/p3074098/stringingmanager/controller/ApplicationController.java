@@ -80,7 +80,7 @@ public class ApplicationController implements Initializable {
         
         contentPane.setViewOrder(1);
         
-        contentPane.getChildren().add(new CustomersController(this));
+        contentPane.getChildren().add(new TransactionsController(this));
         
         setListeners();
     }
