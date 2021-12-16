@@ -64,4 +64,8 @@ public class Customer implements ConfigurationSerializable {
     public UUID getId() {
         return id;
     }
+
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
+    }
 }

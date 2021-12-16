@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import me.p3074098.stringingmanager.controller.FancyInput?>
 
-<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="background-0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="background-0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="145.0" layoutY="101.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -50,14 +50,14 @@
                   </Button>
                </children>
             </VBox>
-            <VBox prefHeight="600.0" prefWidth="500.0">
+            <VBox prefHeight="600.0" prefWidth="657.0" HBox.hgrow="ALWAYS">
                <children>
-                  <TableView fx:id="customerTable" editable="true" prefHeight="600.0" prefWidth="508.0">
+                  <TableView fx:id="customerTable" editable="true" prefHeight="600.0" prefWidth="498.0">
                     <columns>
                       <TableColumn fx:id="firstNameColumn" prefWidth="101.0" styleClass="text-fill-1" text="First Name" />
-                      <TableColumn fx:id="lastNameColumn" prefWidth="103.0" styleClass="text-fill-1" text="Last Name" />
-                        <TableColumn fx:id="phoneColumn" prefWidth="94.0" styleClass="text-fill-1" text="Phone" />
-                        <TableColumn fx:id="emailColumn" prefWidth="181.0" styleClass="text-fill-1" text="Email" />
+                      <TableColumn fx:id="lastNameColumn" prefWidth="140.33334350585938" styleClass="text-fill-1" text="Last Name" />
+                        <TableColumn fx:id="phoneColumn" prefWidth="141.0" styleClass="text-fill-1" text="Phone" />
+                        <TableColumn fx:id="emailColumn" prefWidth="317.0" styleClass="text-fill-1" text="Email" />
                     </columns>
                      <VBox.margin>
                         <Insets />

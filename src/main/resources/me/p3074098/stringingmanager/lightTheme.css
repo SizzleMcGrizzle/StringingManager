@@ -109,6 +109,8 @@
 
 .table-view .column-header {
     -fx-background-color: transparent;
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-fill: -fx-text-color-1;
 }
 
 .table-view .table-cell{
@@ -117,6 +119,7 @@
 .table-row-cell:hover {
     -fx-background-color: #93f9b911;
 }
+
 .table-row-cell:odd{
     -fx-background-color: derive(-fx-color-1, 80%);
     -fx-background-insets: 0, 0 0 1 0;

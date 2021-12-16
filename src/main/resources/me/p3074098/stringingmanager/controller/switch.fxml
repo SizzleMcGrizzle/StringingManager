@@ -13,7 +13,7 @@
    <children>
       <HBox fx:id="fieldBox" alignment="CENTER_LEFT" layoutX="10.0" layoutY="18.0" maxHeight="2000.0" maxWidth="2000.0" minHeight="44.0" minWidth="80.0" prefHeight="44.0" prefWidth="281.0" style="-fx-border-radius: 5px;">
          <children>
-            <Label fx:id="label" prefHeight="42.0" prefWidth="191.0" styleClass="text-fill-1" text="Label">
+            <Label fx:id="label" prefHeight="42.0" prefWidth="191.0" styleClass="fancy-input-normal-text-fill" text="Label">
                <font>
                   <Font size="14.0" />
                </font>
@@ -41,7 +41,7 @@
             </Pane>
          </children>
          <styleClass>
-            <String fx:value="border-color-1" />
+            <String fx:value="fancy-input-normal-border-fill" />
             <String fx:value="drop-shadow-0" />
          </styleClass>
       </HBox>

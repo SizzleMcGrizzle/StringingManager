@@ -6,11 +6,12 @@ import me.p3074098.stringingmanager.util.Settings;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Transaction implements ConfigurationSerializable {
 
-    private Customer customer;
+    private UUID customer;
     private final StringProperty name;
     private final StringProperty racket;
     private final DoubleProperty tension;
@@ -25,8 +26,8 @@ public class Transaction implements ConfigurationSerializable {
     public Transaction(Customer customer, String racket, double tension, boolean preStretch,
                        boolean wax, double due, double loss, String dateDroppedOff) {
 
-        this.customer = customer;
-        this.name = new SimpleStringProperty(customer.getFirstName() + " " + customer.getLastName());
+        this.customer = customer.getId();
+        this.name = new SimpleStringProperty(customer.getFullName());
         this.racket = new SimpleStringProperty(racket);
         this.tension = new SimpleDoubleProperty(tension);
         this.preStretch = new SimpleBooleanProperty(preStretch);
@@ -39,12 +40,7 @@ public class Transaction implements ConfigurationSerializable {
     }
 
     public Transaction(Map<String, Object> map) {
-        UUID id = UUID.fromString((String) map.get("customer"));
-        Settings.CUSTOMERS.stream()
-                .filter(c -> c.getId().equals(id))
-                .findFirst()
-                .ifPresent(c -> customer = c);
-
+        this.customer = UUID.fromString((String) map.get("customer"));
         this.name = new SimpleStringProperty((String) map.get("name"));
         this.racket = new SimpleStringProperty((String) map.get("racket"));
         this.tension = new SimpleDoubleProperty((double) map.get("tension"));
@@ -61,8 +57,8 @@ public class Transaction implements ConfigurationSerializable {
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<>();
 
-        map.put("name", getName());
-        map.put("customer", customer.getId().toString());
+        map.put("name", getFullName());
+        map.put("customer", customer.toString());
         map.put("racket", getRacket());
         map.put("tension", getTension());
         map.put("preStretch", isPreStretched());
@@ -76,11 +72,11 @@ public class Transaction implements ConfigurationSerializable {
         return map;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Optional<Customer> getCustomer() {
+        return Settings.CUSTOMERS.stream().filter(c -> c.getId().equals(customer)).findFirst();
     }
 
-    public String getName() {
+    public String getFullName() {
         return name.get();
     }
 
@@ -88,12 +84,24 @@ public class Transaction implements ConfigurationSerializable {
         return due.get();
     }
 
+    public String getDueFanciful() {
+        return "$" + String.format("%.2f", getDue());
+    }
+
     public double getLoss() {
         return loss.get();
     }
 
+    public String getLossFanciful() {
+        return "$" + String.format("%.2f", getLoss());
+    }
+
     public double getPaid() {
         return paid.get();
+    }
+
+    public String getPaidFanciful() {
+        return "$" + String.format("%.2f", getPaid());
     }
 
     public double getTension() {
@@ -116,8 +124,16 @@ public class Transaction implements ConfigurationSerializable {
         return preStretch.get();
     }
 
+    public String getPreStretchedFanciful() {
+        return isPreStretched() ?  "Y" : "N";
+    }
+
     public boolean isWaxed() {
         return wax.get();
+    }
+
+    public String getWaxedFanciful() {
+        return isWaxed() ? "Y" : "N";
     }
 
     public void setDateReturned(String dateReturned) {

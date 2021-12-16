@@ -5,11 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import me.p3074098.stringingmanager.controller.CustomersController;
+import me.p3074098.stringingmanager.controller.TransactionsController;
 import me.p3074098.stringingmanager.util.Settings;
 
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("controller/application.fxml"));

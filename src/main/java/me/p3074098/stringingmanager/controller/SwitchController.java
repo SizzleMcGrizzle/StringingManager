@@ -33,6 +33,9 @@ public class SwitchController extends Pane {
     
     private final BooleanProperty enabled;
     private final StringProperty labelText;
+
+    private Node nextTarget;
+    private Node previousTarget;
     
     public SwitchController(@NamedArg("labelText") String labelText) {
         this(labelText, false);
@@ -65,6 +68,40 @@ public class SwitchController extends Pane {
         
         switchPane.setOnMouseClicked(e -> setEnabled(!isEnabled()));
         label.setOnMouseClicked(e -> setEnabled(!isEnabled()));
+
+        fieldBox.focusedProperty().addListener(object -> {
+            if(((ObservableBooleanValue) object).get())
+                select();
+            else
+                clearColor();
+        });
+
+        fieldBox.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER)
+                setEnabled(!isEnabled());
+            if (nextTarget != null)
+                if (e.getCode() == KeyCode.DOWN)
+                    nextTarget.requestFocus();
+            if (previousTarget != null)
+                if (e.getCode() == KeyCode.UP)
+                    previousTarget.requestFocus();
+        });
+    }
+
+    private void select() {
+        setColor("selected");
+    }
+
+    protected void clearColor() {
+        setColor("normal");
+    }
+
+    private void setColor(String className) {
+        label.getStyleClass().removeIf(s -> s.contains("fancy-input-"));
+        fieldBox.getStyleClass().removeIf(s -> s.contains("fancy-input-"));
+
+        label.getStyleClass().add("fancy-input-" + className + "-text-fill");
+        fieldBox.getStyleClass().add("fancy-input-" + className + "-border-fill");
     }
     
     private void render() {
@@ -80,7 +117,15 @@ public class SwitchController extends Pane {
         ));
         timeline.play();
     }
-    
+
+    public void setPreviousTarget(Node previousTarget) {
+        this.previousTarget = previousTarget;
+    }
+
+    public void setNextTarget(Node nextTarget) {
+        this.nextTarget = nextTarget;
+    }
+
     public boolean isEnabled() {
         return enabled.get();
     }
@@ -103,5 +148,9 @@ public class SwitchController extends Pane {
     
     public StringProperty labelTextProperty() {
         return labelText;
+    }
+
+    public HBox getFieldBox() {
+        return fieldBox;
     }
 }

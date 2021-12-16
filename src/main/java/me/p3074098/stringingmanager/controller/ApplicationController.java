@@ -3,8 +3,13 @@ package me.p3074098.stringingmanager.controller;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -23,33 +28,23 @@ import java.util.ResourceBundle;
 
 public class ApplicationController implements Initializable {
     
-    @FXML
-    private Label customersButton;
-    
-    @FXML
-    private Label statisticsButton;
-    
-    @FXML
-    private Label transactionsButton;
-    
-    @FXML
-    private BurgerIconController burgerIcon;
-    
-    @FXML
-    private HBox modeButton;
-    
-    @FXML
-    private HBox menuBox;
-    
-    @FXML
-    private AnchorPane base;
+    @FXML private Label customersButton;
+    @FXML private Label statisticsButton;
+    @FXML private Label transactionsButton;
+    @FXML private BurgerIconController burgerIcon;
+    @FXML private HBox modeButton;
+    @FXML private HBox menuBox;
+    @FXML private AnchorPane base;
+    @FXML private Pane contentPane;
     
     private BackgroundImage dayImage;
     private BackgroundImage nightImage;
-    
-    @FXML
-    private Pane contentPane;
-    
+
+
+    private TransactionsController transactionsController;
+    private CustomersController customersController;
+
+    private ObjectProperty<Node> currentController;
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -68,6 +63,9 @@ public class ApplicationController implements Initializable {
         modeButton.setBackground(new Background(Settings.CURRENT_STYLESHEET.equals("darkTheme.css") ? nightImage : dayImage));
         
         contentPane = new Pane();
+
+        customersController = new CustomersController(this);
+        transactionsController = new TransactionsController(this);
         
         contentPane.getStyleClass().add("background-0");
         
@@ -79,9 +77,20 @@ public class ApplicationController implements Initializable {
         base.getChildren().add(contentPane);
         
         contentPane.setViewOrder(1);
-        
-        contentPane.getChildren().add(new TransactionsController(this));
-        
+
+        currentController = new SimpleObjectProperty<>(transactionsController);
+
+        currentController.addListener((observableValue, node, t1) -> {
+            contentPane.getChildren().clear();
+
+            contentPane.getChildren().add(currentController.get());
+        });
+
+        contentPane.getChildren().add(currentController.get());
+
+        customersButton.setOnMouseClicked(e -> setCurrentController(customersController));
+        transactionsButton.setOnMouseClicked(e -> setCurrentController(transactionsController));
+
         setListeners();
     }
     
@@ -118,6 +127,10 @@ public class ApplicationController implements Initializable {
                             new KeyValue(menuBox.translateXProperty(), x)));
             timeline.play();
         });
+    }
+
+    public void setCurrentController(Node currentController) {
+        this.currentController.set(currentController);
     }
 
     public BurgerIconController getBurgerIcon() {

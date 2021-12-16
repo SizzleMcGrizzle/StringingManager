@@ -54,6 +54,8 @@ public class FancyInput extends Pane {
     
     private Predicate<String> stringValidate;
     private Predicate<Double> doubleValidate;
+
+    private boolean allowPeriods = false;
     
     public FancyInput(@NamedArg("labelText") String labelText,
                       @NamedArg("promptText") String promptText) {
@@ -138,10 +140,12 @@ public class FancyInput extends Pane {
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String text = change.getText();
 
-            if (getInputType().equals(Double.class))
-                if (!text.matches("[0-9]*")) {
+            if (getInputType().equals(Double.class)) {
+                if (allowPeriods && text.equals("."))
+                    return change;
+                if (!text.matches("[0-9]*"))
                     return null;
-                }
+            }
             
             if (textField.getText().length() == this.maxChars.get())
                 change.setText("");
@@ -168,7 +172,11 @@ public class FancyInput extends Pane {
 
             timeline.play();
     }
-    
+
+    public void setAllowPeriods(boolean allowPeriods) {
+        this.allowPeriods = allowPeriods;
+    }
+
     public void setNextTarget(Node nextTarget) {
         this.nextTarget = nextTarget;
     }
