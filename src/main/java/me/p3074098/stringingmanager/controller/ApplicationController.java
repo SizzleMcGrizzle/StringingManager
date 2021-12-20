@@ -43,6 +43,7 @@ public class ApplicationController implements Initializable {
 
     private TransactionsController transactionsController;
     private CustomersController customersController;
+    private StatisticsController statisticsController;
 
     private ObjectProperty<Node> currentController;
     
@@ -66,6 +67,7 @@ public class ApplicationController implements Initializable {
 
         customersController = new CustomersController(this);
         transactionsController = new TransactionsController(this);
+        statisticsController = new StatisticsController(this);
         
         contentPane.getStyleClass().add("background-0");
         
@@ -90,6 +92,7 @@ public class ApplicationController implements Initializable {
 
         customersButton.setOnMouseClicked(e -> setCurrentController(customersController));
         transactionsButton.setOnMouseClicked(e -> setCurrentController(transactionsController));
+        statisticsButton.setOnMouseClicked(e -> setCurrentController(statisticsController));
 
         setListeners();
     }

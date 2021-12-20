@@ -27,6 +27,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
+import me.p3074098.stringingmanager.api.Warnable;
 
 import java.io.IOException;
 import java.util.function.BiFunction;
@@ -36,12 +37,14 @@ import java.util.function.UnaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FancyInput extends Pane {
+public class FancyInput extends Pane implements Warnable {
 
     @FXML private Pane anchor;
     @FXML private HBox fieldBox;
     @FXML private Label label;
     @FXML private TextField textField;
+    
+    private boolean warn = true;
     
     private IntegerProperty maxChars = new SimpleIntegerProperty(Integer.MAX_VALUE);
     private IntegerProperty minChars = new SimpleIntegerProperty(0);
@@ -206,7 +209,10 @@ public class FancyInput extends Pane {
     }
 
     protected void warn() {
-        setColor("warn");
+        if (isWarnable())
+            setColor("warn");
+        else
+            setColor("normal");
     }
 
     private void setColor(String className) {
@@ -332,5 +338,16 @@ public class FancyInput extends Pane {
     
     public int getMinChars() {
         return minChars.get();
+    }
+    
+    @Override
+    public boolean isWarnable() {
+        return warn;
+    }
+    
+    @Override
+    public void setWarnable(boolean warnable) {
+        this.warn = warnable;
+        warn();
     }
 }

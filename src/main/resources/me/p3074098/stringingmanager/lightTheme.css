@@ -7,7 +7,7 @@
     -fx-text-color-0: black;
     -fx-text-color-1: #333;
     -fx-drop-shadow-0: dropShadow(gaussian, rgba(0, 0, 0, 0.1), 20, 0.1, 0.0, 0.0);
-    -fx-fancy-input-select-color: #2CA1FF;
+    -fx-fancy-input-select-color: -fx-color-accent;
     -fx-fancy-input-warn-color: red;
 }
 
@@ -45,10 +45,12 @@
 
 .text-fill-0 {
     -fx-text-fill: -fx-text-color-0;
+    -fx-fill: -fx-text-color-0;
 }
 
 .text-fill-1 {
     -fx-text-fill: -fx-text-color-1;
+    -fx-fill: -fx-text-color-1;
 }
 
 .border-radius-0 {

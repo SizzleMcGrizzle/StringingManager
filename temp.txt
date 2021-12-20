@@ -1,0 +1,1 @@
+java.base,java.desktop,java.logging,java.scripting,jdk.jfr,jdk.unsupported

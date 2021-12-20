@@ -123,7 +123,7 @@ public class CustomersController extends AnchorPane {
             Settings.CUSTOMERS.add(customer);
             input1.getTextField().requestFocus();
         });
-
+        
         addButton.focusedProperty().addListener(object -> {
             if(((ObservableBooleanValue) object).get())
                 AnimationUtil.animateBorder(addButton);
